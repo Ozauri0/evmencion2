@@ -1,16 +1,16 @@
 class Server {
-  constructor(id, titulo, descripcion, fechaPublicacion, autor, comentarios, self, precio, nucleos, ram, disco) {
+  constructor(id, titulo, descripcion, precio, nucleos, ram, disco, cluster, estado, fechaCreacion, self) {
     this.id = id;
     this.titulo = titulo;
     this.descripcion = descripcion;
-    this.fechaPublicacion = fechaPublicacion;
-    this.autor = autor;
-    this.comentarios = comentarios;
-    this.self = self;
     this.precio = precio;
     this.nucleos = nucleos;
     this.ram = ram;
     this.disco = disco;
+    this.cluster = cluster;
+    this.estado = estado;
+    this.fechaCreacion = fechaCreacion;
+    this.self = self;
   }
 }
 

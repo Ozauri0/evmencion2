@@ -27,8 +27,8 @@ class ServerController {
 
   async create(req, res) {
     try {
-      const { titulo, descripcion, autor, precio, nucleos, ram, disco } = req.body;
-      const server = await this.createServer.execute(titulo, descripcion, autor, precio, nucleos, ram, disco);
+      const { titulo, descripcion, precio, nucleos, ram, disco, cluster, estado } = req.body;
+      const server = await this.createServer.execute(titulo, descripcion, precio, nucleos, ram, disco, cluster, estado);
       res.status(201).json(server);
     } catch (error) {
       res.status(500).send(error.message);

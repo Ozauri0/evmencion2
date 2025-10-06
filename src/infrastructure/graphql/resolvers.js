@@ -1,7 +1,7 @@
 function createResolvers(getServers, createServer) {
   return {
-    products: async () => await getServers.execute(),
-    createProduct: async ({ titulo, descripcion, autor, precio, nucleos, ram, disco }) => await createServer.execute(titulo, descripcion, autor, precio, nucleos, ram, disco)
+    productos: async () => await getServers.execute(),
+    createProducto: async ({ titulo, descripcion, precio, nucleos, ram, disco, cluster, estado }) => await createServer.execute(titulo, descripcion, precio, nucleos, ram, disco, cluster, estado)
   };
 }
 

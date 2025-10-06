@@ -9,27 +9,27 @@ class InMemoryServerRepository extends ServerRepository {
         1,
         'Servidor VPS Básico',
         'Servidor VPS con recursos básicos.',
-        '2023-11-04T14:30:00Z',
-        { id: 456, name: 'Christian Ferrer', profile_url: 'https://paginaejemplo.com/autores/69' },
-        { count: 5, comments_url: 'https://paginaejemplo.com/servers/1/comments' },
-        { link: 'https://paginaejemplo.com/servers/1' },
-        9.990,
+        9990,
         1,
         '1GB',
-        '20GB'
+        '20GB',
+        { id: 1, nombre: 'Cluster Norte', ubicacion: { region: 'Región de La Araucanía', ciudad: 'Temuco' } },
+        'activo',
+        '2023-11-04T14:30:00Z',
+        { link: 'https://ejemplo.com/productos/1' }
       ),
       new Server(
         2,
         'Servidor VPS Avanzado',
         'Servidor VPS con más recursos.',
-        '2023-11-05T10:00:00Z',
-        { id: 789, name: 'Benjamin Sanchez', profile_url: 'https://paginaejemplo.com/autores/420' },
-        { count: 2, comments_url: 'https://paginaejemplo.com/servers/2/comments' },
-        { link: 'https://paginaejemplo.com/servers/2' },
-        9.990,
+        12990,
         2,
         '2GB',
-        '50GB'
+        '50GB',
+        { id: 2, nombre: 'Cluster Sur', ubicacion: { region: 'Región Metropolitana', ciudad: 'Santiago' } },
+        'activo',
+        '2023-11-05T10:00:00Z',
+        { link: 'https://ejemplo.com/productos/2' }
       )
     ];
     this.nextId = 3;

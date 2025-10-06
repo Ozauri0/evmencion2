@@ -1,47 +1,52 @@
 const { buildSchema } = require('graphql');
 
 const schema = buildSchema(`
-  type Author {
+  type Cluster {
     id: ID!
-    name: String!
-    profile_url: String!
+    nombre: String!
+    ubicacion: Ubicacion!
   }
 
-  type Comments {
-    count: Int!
-    comments_url: String!
+  type Ubicacion {
+    region: String!
+    ciudad: String!
   }
 
   type Self {
     link: String!
   }
 
-  type Product {
+  type Producto {
     id: ID!
     titulo: String!
     descripcion: String!
-    fechaPublicacion: String!
-    autor: Author!
-    comentarios: Comments!
-    self: Self!
     precio: Float!
     nucleos: Int!
     ram: String!
     disco: String!
+    cluster: Cluster!
+    estado: String!
+    fechaCreacion: String!
+    self: Self!
   }
 
   type Query {
-    products: [Product]
+    productos: [Producto]
   }
 
   type Mutation {
-    createProduct(titulo: String!, descripcion: String!, autor: AuthorInput!, precio: Float!, nucleos: Int!, ram: String!, disco: String!): Product
+    createProducto(titulo: String!, descripcion: String!, precio: Float!, nucleos: Int!, ram: String!, disco: String!, cluster: ClusterInput!, estado: String): Producto
   }
 
-  input AuthorInput {
+  input ClusterInput {
     id: ID!
-    name: String!
-    profile_url: String!
+    nombre: String!
+    ubicacion: UbicacionInput!
+  }
+
+  input UbicacionInput {
+    region: String!
+    ciudad: String!
   }
 `);
 

@@ -5,12 +5,11 @@ class CreateServer {
     this.serverRepository = serverRepository;
   }
 
-  async execute(titulo, descripcion, autor, precio, nucleos, ram, disco) {
+  async execute(titulo, descripcion, precio, nucleos, ram, disco, cluster, estado = 'activo') {
     const id = await this.serverRepository.getNextId();
-    const fechaPublicacion = new Date().toISOString();
-    const comentarios = { count: 0, comments_url: `https://ejemplo.com/servers/${id}/comments` };
-    const self = { link: `https://ejemplo.com/servers/${id}` };
-    const server = new Server(id, titulo, descripcion, fechaPublicacion, autor, comentarios, self, precio, nucleos, ram, disco);
+    const fechaCreacion = new Date().toISOString();
+    const self = { link: `https://ejemplo.com/productos/${id}` };
+    const server = new Server(id, titulo, descripcion, precio, nucleos, ram, disco, cluster, estado, fechaCreacion, self);
     return await this.serverRepository.save(server);
   }
 }
