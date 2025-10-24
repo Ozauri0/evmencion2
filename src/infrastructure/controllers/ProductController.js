@@ -37,7 +37,26 @@ class ServerController {
 
   async update(req, res) {
     try {
-      const server = await this.updateServer.execute(req.params.id, req.body);
+      // Validar que solo se actualicen campos permitidos
+      const allowedFields = ['titulo', 'descripcion', 'precio', 'nucleos', 'ram', 'disco', 'cluster', 'estado'];
+      const updateData = {};
+      
+      // Filtrar solo los campos permitidos
+      for (const [key, value] of Object.entries(req.body)) {
+        if (allowedFields.includes(key)) {
+          updateData[key] = value;
+        }
+      }
+      
+      // Verificar que se envió al menos un campo válido
+      if (Object.keys(updateData).length === 0) {
+        return res.status(400).json({ 
+          error: 'No se proporcionaron campos válidos para actualizar',
+          allowedFields: allowedFields 
+        });
+      }
+      
+      const server = await this.updateServer.execute(req.params.id, updateData);
       server ? res.json(server) : res.status(404).send('Servidor no encontrado');
     } catch (error) {
       res.status(500).send(error.message);

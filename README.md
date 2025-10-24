@@ -11,7 +11,7 @@ El proyecto simula un catálogo de servidores VPS, permitiendo operaciones CRUD 
 - **GraphQL integrado**: Query `products` para listar recursos y Mutation `createProduct` para crear nuevos.
 - **Arquitectura Hexagonal**: Separación en capas (Dominio, Aplicación, Infraestructura) para alta mantenibilidad.
 - **Persistencia en memoria**: Uso de arrays para simulación de base de datos (fácil reemplazo por BD real).
-- **Campos especializados**: Incluye precio, núcleos, RAM y disco para representar servidores VPS.
+- **Campos especializados**: Incluye precio, núcleos, RAM, disco y cluster con ubicación regional de Chile para representar servidores VPS.
 
 ## Tecnologías Utilizadas
 - **Node.js**: Entorno de ejecución.
@@ -29,7 +29,7 @@ El proyecto simula un catálogo de servidores VPS, permitiendo operaciones CRUD 
 ### Pasos de Instalación
 1. Clona el repositorio:
    ```bash
-   git clone <URL_DEL_REPOSITORIO>
+   git clone https://github.com/Ozauri0/evmencion2.git
    cd evmencion2
    ```
 
@@ -72,7 +72,14 @@ Respuesta: `{"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."}`
     -d '{
       "titulo": "Servidor VPS Premium",
       "descripcion": "Plan de alto rendimiento",
-      "autor": {"id": 1, "name": "Admin", "profile_url": "https://ejemplo.com/authors/1"},
+      "cluster": {
+        "id": 1,
+        "nombre": "Cluster Centro",
+        "ubicacion": {
+          "region": "Región Metropolitana",
+          "ciudad": "Santiago"
+        }
+      },
       "precio": 50.0,
       "nucleos": 4,
       "ram": "8GB",
@@ -105,24 +112,23 @@ Accede a `http://localhost:3000/graphql` para usar GraphiQL.
 - **Query para listar productos**:
   ```graphql
   {
-    products {
+    productos {
       id
       titulo
-      autor {
+      cluster {
         id
-        name
-        profile_url
+        nombre
+        ubicacion {
+          region
+          ciudad
+        }
       }
       precio
       nucleos
       ram
       disco
-      comentarios{
-        count
-      }
-      self{
-        link
-      }
+      estado
+      fechaCreacion
     }
   }
   ```
@@ -130,14 +136,22 @@ Accede a `http://localhost:3000/graphql` para usar GraphiQL.
 - **Mutation para crear producto**:
   ```graphql
   mutation {
-    createProduct(
+    createProducto(
       titulo: "Nuevo Servidor"
       descripcion: "Descripción"
-      autor: { id: 1, name: "Autor", profile_url: "https://ejemplo.com/authors/1" }
       precio: 25.0
       nucleos: 2
       ram: "4GB"
       disco: "60GB"
+      cluster: {
+        id: 1,
+        nombre: "Cluster Norte",
+        ubicacion: {
+          region: "Región de La Araucanía",
+          ciudad: "Temuco"
+        }
+      }
+      estado: "activo"
     ) {
       id
       titulo
@@ -171,7 +185,7 @@ app.js                     # Punto de entrada
 ## Cumplimiento de Requisitos
 1. **Endpoints REST**: Implementados para productos (GET, POST, GET by ID, PUT, PATCH, DELETE, GET ALL).
 2. **Protección JWT en POST**: Solo el POST requiere Bearer token con secreto `secreto123`.
-3. **GraphQL**: Query `products` y Mutation `createProduct`.
+3. **GraphQL**: Query `productos` y Mutation `createProducto`.
 4. **Presentación**: Preparado para explicación en sala (orden alfabético).
 
 ## Pruebas
