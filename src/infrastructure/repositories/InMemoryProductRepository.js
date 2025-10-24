@@ -69,6 +69,16 @@ class InMemoryServerRepository extends ServerRepository {
   async getNextId() {
     return this.nextId++;
   }
+
+  async findByTitle(searchTerm) {
+    return this.servers.filter(server => 
+      server.titulo.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+  }
+
+  async findByEstado(estado) {
+    return this.servers.filter(server => server.estado === estado);
+  }
 }
 
 module.exports = InMemoryServerRepository;
