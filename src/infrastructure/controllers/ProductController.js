@@ -29,9 +29,23 @@ class ServerController {
     try {
       const { titulo, descripcion, precio, nucleos, ram, disco, cluster, estado } = req.body;
       const server = await this.createServer.execute(titulo, descripcion, precio, nucleos, ram, disco, cluster, estado);
-      res.status(201).json(server);
+      res.status(201).json({
+        message: 'Producto creado exitosamente',
+        data: server
+      });
     } catch (error) {
-      res.status(500).send(error.message);
+      // Diferenciar entre errores de validación y errores internos
+      if (error.message.includes('requerido') || error.message.includes('debe ser')) {
+        res.status(400).json({
+          error: 'Datos inválidos',
+          message: error.message
+        });
+      } else {
+        res.status(500).json({
+          error: 'Error interno del servidor',
+          message: process.env.NODE_ENV === 'production' ? 'Ha ocurrido un error inesperado' : error.message
+        });
+      }
     }
   }
 

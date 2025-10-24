@@ -8,12 +8,12 @@ class InMemoryServerRepository extends ServerRepository {
       new Server(
         1,
         'Servidor VPS Básico',
-        'Servidor VPS con recursos básicos.',
+        'Servidor VPS con recursos básicos para proyectos pequeños',
         9990,
         1,
-        '1GB',
-        '20GB',
-        { id: 1, nombre: 'Cluster Norte', ubicacion: { region: 'Región de La Araucanía', ciudad: 'Temuco' } },
+        1,
+        20,
+        'Cluster Norte',
         'activo',
         '2023-11-04T14:30:00Z',
         { link: 'https://ejemplo.com/productos/1' }
@@ -21,12 +21,12 @@ class InMemoryServerRepository extends ServerRepository {
       new Server(
         2,
         'Servidor VPS Avanzado',
-        'Servidor VPS con más recursos.',
+        'Servidor VPS con más recursos para aplicaciones medianas',
         12990,
         2,
-        '2GB',
-        '50GB',
-        { id: 2, nombre: 'Cluster Sur', ubicacion: { region: 'Región Metropolitana', ciudad: 'Santiago' } },
+        2,
+        50,
+        'Cluster Sur',
         'activo',
         '2023-11-05T10:00:00Z',
         { link: 'https://ejemplo.com/productos/2' }
